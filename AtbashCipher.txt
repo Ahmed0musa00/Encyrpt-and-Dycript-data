@@ -1,0 +1,80 @@
+
+package atbash.cipher;
+
+import java.util.Scanner;
+
+public class AtbashCipher {
+
+    private static Scanner in;
+    
+    public static void main(String[] args) {
+        
+       in = new Scanner(System.in);
+        System.out.print("Enter your choise: ");
+        System.out.println("1-Encryption \t 2-Decryption");
+        int choise = in.nextInt();
+        in.nextLine();
+        
+        switch(choise)
+        {
+            case 1 :
+                System.out.println("---Encryption---");
+                System.out.println("Enter your plaintext");
+                String p = in.next();
+                in.nextLine();
+                System.out.println("Your cipher text is: "+Encryption(p));
+                break;
+                
+            case 2 :
+                System.out.println("---Decryption---");
+                Decryption();
+                break;
+                
+            default :
+                System.out.println("Incorrect choise");
+                break;
+        }
+        
+    }
+    
+    public static String Encryption(String plaintext)
+    {
+      String alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      String reversealph = "";
+      
+      for(int i=alph.length();i>0;i--)
+      {
+        reversealph+=alph.charAt(i);
+      }
+        
+        plaintext=plaintext.toUpperCase();
+        String ciphertext = "";
+        for(int i=0;i<ciphertext.length();i++)
+        {
+          if(plaintext.charAt(i)==(char)32) 
+          {
+            ciphertext+=" ";      
+          }
+          else 
+          {
+            for(int j=0;j<alph.length();j++)
+            {
+              if(plaintext.charAt(i)==alph.charAt(j))
+              {
+                 ciphertext +=reversealph.charAt(j);
+                 break;
+              }
+              
+            } //inner for
+             
+           }//if else 
+          
+        }//for
+        
+        return ciphertext;
+    }
+    
+    
+    
+    
+}
